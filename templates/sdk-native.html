@@ -1,0 +1,286 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui"
+        name="viewport">
+    <style>
+        *,
+        *:active,
+        *:focus {
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        html,
+        body {
+            display: flex;
+            flex-direction: column;
+            align-content: space-between;
+            margin: 0;
+            padding: 0;
+            color: #000000;
+        }
+
+        #content {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            padding: 0;
+            margin: 0;
+            background-color: #000000;
+        }
+
+        #top_bar {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            align-items: center;
+            width: 96vw;
+            height: auto;
+            padding: 1vw 2vw 1vw 2vw;
+            margin: 0;
+            background-color: #FFFFFF;
+        }
+
+        #icon {
+            width: 12vw;
+            height: 12vw;
+            padding: 0;
+            margin: 1vw;
+            border: 0;
+        }
+
+        #title_bar {
+            display: flex;
+            flex-direction: column;
+            align-content: space-between;
+        }
+
+        #title {
+            font-weight: bold;
+            font-size: 4vw;
+            height: 5vw;
+            color: #000000;
+        }
+
+        #subtitle {
+            font-size: 3vw;
+            height: 5vw;
+            color: #333333;
+        }
+
+        #description {
+            width: 96vw;
+            height: 4vw;
+            font-size: 3vw;
+            padding: 1vw 2vw 1vw 2vw;
+            color: #666666;
+        }
+
+        #button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 24vw;
+            height: 8vw;
+            margin: 1vw;
+            background: #3385FF;
+            border-radius: 2vw;
+            color: #FFFFFF;
+            font-size: 4vw;
+        }
+
+        #images_box {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100vw;
+            height: auto;
+        }
+
+        #video_box {
+            width: 100vw;
+            height: auto;
+        }
+
+        #bottom_bar {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            width: 96vw;
+            height: 4vw;
+            padding: 1vw 2vw 1vw 2vw;
+        }
+
+        #logo {
+            width: 4vw;
+            height: 4vw;
+            padding-right: 2vw;
+            border: 0;
+        }
+
+        #advertiser_name {
+            font-size: 3vw;
+            color: #666666;
+            font-weight: bold;
+            padding-right: 2vw;
+        }
+
+        #ad_text {
+            font-size: 2vw;
+            color: #999999;
+            padding: 0vw 0.5vw 0vw 0.5vw;
+            border: #eeeeee solid 1px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content">
+        <a href="{{ .TargetURL }}">
+            <div id="top_bar">
+                <img src="{{ .IconURL }}" id="icon" />
+                <div id="title_bar">
+                    <div id="title">{{ .Title }}</div>
+                    <div id="subtitle">{{ .Subtitle }}</div>
+                </div>
+                <div id="button">{{ .ButtonText }}</div>
+            </div>
+        </a>
+        <div id="description">{{ .Description }}</div>
+        <a href="{{ .TargetURL }}">
+            <div id="images_box">
+                <img src="{{ if gt (len .Images) 0 }}{{ index .Images 0 }}{{ end }}" id="image1" />
+                <img src="{{ if gt (len .Images) 1 }}{{ index .Images 1 }}{{ end }}" id="image2" />
+                <img src="{{ if gt (len .Images) 2 }}{{ index .Images 2 }}{{ end }}" id="image3" />
+            </div>
+        </a>
+        <div id="video_box">
+            <video controls muted poster="{{ if gt (len .Images) 0 }}{{ index .Images 0 }}{{ end }}"
+                src="{{ .VideoURL }}"></video>
+        </div>
+        <div id="bottom_bar">
+            <img id="logo" src="{{ .LogoURL }}" />
+            <div id="advertiser_name">{{ .AdvertiserName }}</div>
+            <div id="ad_text">广告</div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        (function () {
+            var webViewWidth = adtalos.getWidth();
+            var webViewHeight = adtalos.getHeight();
+            var top_bar = document.getElementById('top_bar');
+            var icon = document.getElementById('icon');
+            var title_bar = document.getElementById('title_bar');
+            var title = document.getElementById('title');
+            var subtitle = document.getElementById('subtitle');
+            var button = document.getElementById('button');
+            var description = document.getElementById('description');
+            var images_box = document.getElementById('images_box');
+            var image1 = document.getElementById('image1');
+            var image2 = document.getElementById('image2');
+            var image3 = document.getElementById('image3');
+            var video_box = document.getElementById('video_box');
+            var logo = document.getElementById('logo');
+            var advertiser_name = document.getElementById('advertiser_name');
+            var video = video_box.getElementsByTagName('video')[0];
+            var imageHeight = webViewHeight - webViewWidth * 0.06;
+
+            if (video.src.trim() != '') {
+                images_box.style.display = 'none';
+            } else {
+                video_box.style.display = 'none';
+                video_box.removeChild(video);
+            }
+
+            var topBarHeight = webViewWidth * 0.14;
+            if (icon.src.trim() == '') {
+                icon.style.display = 'none';
+                topBarHeight = 0;
+            }
+
+            if (button.innerHTML.trim() == '') {
+                button.style.display = 'none';
+            } else if (topBarHeight == 0) {
+                topBarHeight = webViewWidth * 0.12;
+            }
+
+            if (title.innerHTML.trim() == '' && subtitle.innerHTML.trim() == '') {
+                title_bar.style.display = 'none';
+            } else if (title.innerHTML.trim() == '') {
+                title.style.display = 'none';
+                if (topBarHeight == 0) {
+                    topBarHeight = webViewWidth * 0.07;
+                }
+            } else if (subtitle.innerHTML.trim() == '') {
+                subtitle.style.display = 'none';
+                if (topBarHeight == 0) {
+                    topBarHeight = webViewWidth * 0.07;
+                }
+            } else if (topBarHeight == 0) {
+                topBarHeight = webViewWidth * 0.12;
+            }
+
+            if (icon.src.trim() == '' &&
+                title.innerHTML.trim() == '' &&
+                subtitle.innerHTML.trim() == '' &&
+                button.innerHTML.trim() == '') {
+                top_bar.style.display = 'none';
+            }
+
+            imageHeight -= topBarHeight;
+
+            if (description.innerHTML.trim() == '') {
+                description.style.display = 'none';
+            } else {
+                imageHeight -= webViewWidth * 0.06;
+            }
+
+            if (imageHeight > 0) {
+                imageHeight += 'px';
+                images_box.style.height = imageHeight;
+                image1.style.height = imageHeight;
+                image2.style.height = imageHeight;
+                image3.style.height = imageHeight;
+                video_box.style.height = imageHeight;
+            }
+
+            if (image1.src.trim() == '') {
+                if (imageHeight > 0) {
+                    images_box.style.display = 'none';
+                }
+            } else if (image2.src.trim() == '') {
+                image1.style.width = '100vw';
+                image2.style.display = 'none';
+                image3.style.display = 'none';
+            } else if (image3.src.trim() == '') {
+                image1.style.width = '50vw';
+                image2.style.width = '50vw';
+                image3.style.display = 'none';
+            } else {
+                image1.style.width = '33vw';
+                image2.style.width = '33vw';
+                image3.style.width = '33vw';
+            }
+
+            if (logo.src.trim() == '') {
+                logo.style.display = 'none';
+            }
+
+            if (advertiser_name.innerHTML.trim() == '') {
+                advertiser_name.style.display = 'none';
+            }
+        })();
+    </script>
+</body>
+
+</html>
