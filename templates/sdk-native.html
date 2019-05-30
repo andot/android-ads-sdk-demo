@@ -39,6 +39,18 @@
             background-color: #000000;
         }
 
+        video::-internal-media-controls-download-button {
+            display: none;
+        }
+
+        video::-webkit-media-controls-enclosure {
+            overflow: hidden;
+        }
+
+        video::-webkit-media-controls-panel {
+            width: calc(100% + 46px);
+        }
+
         #top_bar {
             display: flex;
             flex-wrap: nowrap;
@@ -70,18 +82,18 @@
             font-size: 4vw;
             height: 5vw;
             color: #000000;
-            white-space:nowrap;
-            overflow:hidden;
-            text-overflow:ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         #subtitle {
             font-size: 3vw;
             height: 5vw;
             color: #333333;
-            white-space:nowrap;
-            overflow:hidden;
-            text-overflow:ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         #space {
@@ -95,9 +107,9 @@
             font-size: 3vw;
             padding: 1vw 2vw 1vw 2vw;
             color: #666666;
-            white-space:nowrap;
-            overflow:hidden;
-            text-overflow:ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         #button {
@@ -180,8 +192,8 @@
             </div>
         </a>
         <div id="video_box">
-            <video controls muted poster="{{ if gt (len .Images) 0 }}{{ index .Images 0 }}{{ end }}"
-                src="{{ .VideoURL }}"></video>
+            <video src="{{ .VideoURL }}" poster="{{ if gt (len .Images) 0 }}{{ index .Images 0 }}{{ end }}"
+                controlsList="nodownload" controls muted></video>
         </div>
         <div id="bottom_bar">
             <img id="logo" src="{{ .LogoURL }}" />
