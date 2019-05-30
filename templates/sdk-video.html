@@ -46,31 +46,53 @@
         position: fixed;
         justify-content: space-around;
         align-items: center;
-        width: 100vw;
-        height: 25vw;
         bottom: 0;
-        left: 0;
         background-color: rgba(255,255,255,0.8);
     }
-    #download_bar_icon {
+    #download_bar.portrait {
+        width: 100vw;
+        height: 25vw;
+    }
+    #download_bar.landscape {
+        width: 100vh;
+        height: 25vh;
+    }
+    #download_bar.portrait #download_bar_icon {
         width: 20vw;
         height: 20vw;
     }
+    #download_bar.landscape #download_bar_icon {
+        width: 20vh;
+        height: 20vh;
+    }
     #download_bar ul {
         list-style-type: none;
-        font-size: 4vw;
         padding: 0;
+    }
+    #download_bar.portrait ul {
+        font-size: 4vw;
+    }
+    #download_bar.landscape ul {
+        font-size: 4vh;
     }
     .download_button {
         display: flex;
         justify-content: center;
         align-items: center;
+        background: #3385FF;
+        color: #FFFFFF;
+    }
+    #download_bar.portrait .download_button {
         width: 30vw;
         height: 10vw;
-        background: #3385FF;
         border-radius: 2vw;
-        color: #FFFFFF;
         font-size: 4vw;
+    }
+    #download_bar.landscape .download_button {
+        width: 30vh;
+        height: 10vh;
+        border-radius: 2vh;
+        font-size: 4vh;
     }
     #end_card {
         width: 100%;
@@ -107,37 +129,58 @@
         position: fixed;
         justify-content: center;
         align-items: center;
-        width: 8vw;
-        height: 8vw;
         background-color: rgba(0,0,0,0.4);
         border-radius: 50%;
         color: #FFFFFF;
-        line-height: 1.2em;
     }
-    #muted_button {
+    #muted_button.portrait {
         left: 5vw;
         top: 5vw;
+        width: 8vw;
+        height: 8vw;
         font-size: 5vw;
     }
-    #close_button {
+    #muted_button.landscape {
+        left: 5vh;
+        top: 5vh;
+        width: 8vh;
+        height: 8vh;
+        font-size: 5vh;
+    }
+    #close_button.portrait {
         right: 5vw;
         top: 5vw;
+        width: 8vw;
+        height: 8vw;
         font-size: 4vw;
     }
-    .progress {
+    #close_button.landscape {
+        right: 5vh;
+        top: 5vh;
+        width: 8vh;
+        height: 8vh;
+        font-size: 4vh;
+    }
+    #progress.portrait {
         position: fixed;
         width: 10vw;
         height: 10vw;
         right: 4vw;
         top: 4vw;
     }
-    .progress #progress {
+    #progress.landscape {
+        position: fixed;
+        width: 10vh;
+        height: 10vh;
+        right: 4vh;
+        top: 4vh;
+    }
+    #progress #seconds {
         position: absolute;
         width: 100%;
         height : 100%;
         display: flex;
         flex-wrap: nowrap;
-        font-size: 4vw;
         justify-content: center;
         align-items: center;
         line-height: 1.2em;
@@ -145,36 +188,59 @@
         background-color: rgba(0,0,0,0.4);
         border-radius: 50%;
     }
-    .progress .wrapper {
+    #progress.portrait #seconds {
+        font-size: 4vw;
+    }
+    #progress.landscape #seconds {
+        font-size: 4vh;
+    }
+    #progress .wrapper {
         width: 50%;
         height: 100%;
         position: absolute;
         top: 0;
         overflow: hidden;
     }
-    .progress .right {
+    #progress .right {
         right: 0;
     }
-    .progress .left {
+    #progress .left {
         left: 0;
     }
-    .progress .circle {
-        width: 8vw;
-        height: 8vw;
-        border: 1vw solid #3385FF;
+    #progress .circle {
         border-radius: 50%;
         position: absolute;
         top: 0;
         transform: rotate(-135deg);
     }
-    .progress .right_circle {
+    #progress.portrait .circle {
+        width: 8vw;
+        height: 8vw;
+        border: 1vw solid #3385FF;
+    }
+    #progress.landscape .circle {
+        width: 8vh;
+        height: 8vh;
+        border: 1vh solid #3385FF;
+    }
+    #progress.portrait .right_circle {
         border-top: 1vw solid transparent;
         border-right: 1vw solid transparent;
         right: 0;
     }
-    .progress .left_circle {
+    #progress.landscape .right_circle {
+        border-top: 1vh solid transparent;
+        border-right: 1vh solid transparent;
+        right: 0;
+    }
+    #progress.portrait .left_circle {
         border-bottom: 1vw solid transparent;
         border-left: 1vw solid transparent;
+        left: 0;
+    }
+    #progress.landscape .left_circle {
+        border-bottom: 1vh solid transparent;
+        border-left: 1vh solid transparent;
         left: 0;
     }
     @-webkit-keyframes circle_right {
@@ -193,10 +259,15 @@
             -webkit-transform: rotate(45deg);
         }
     }
-    svg {
+    .portrait svg {
         fill: #ffffff;
         width: 8vw;
         height: 8vw;
+    }
+    .landscape svg {
+        fill: #ffffff;
+        width: 8vh;
+        height: 8vh;
     }
     </style>
 </head>
@@ -215,8 +286,8 @@
             <div class="download_button">立即下载</div>
         </div>
     </a>
-    <div class="progress">
-        <div id="progress"></div>
+    <div id="progress">
+        <div id="seconds"></div>
         <div class="wrapper right">
             <div class="circle right_circle" id="right_circle"></div>
         </div>
@@ -259,14 +330,38 @@
     var right_circle = document.getElementById('right_circle');
     var left_circle = document.getElementById('left_circle');
     var progress = document.getElementById('progress');
+    var seconds = document.getElementById('seconds');
     var volume_off = document.getElementById('volume_off');
     var volume_30 = document.getElementById('volume_30');
     var volume_60 = document.getElementById('volume_60');
     var volume_100 = document.getElementById('volume_100');
     var volume = volume_off;
+    var muted_button = document.getElementById('muted_button');
     var close_button = document.getElementById('close_button');
     var download_bar_icon = document.getElementById('download_bar_icon');
     var end_card_icon = document.getElementById('end_card_icon');
+
+    function resize() {
+        var width = document.body.offsetWidth;
+        var height = document.body.offsetHeight;
+        if (width < height) {
+            progress.className = 'portrait';
+            muted_button.className = 'portrait';
+            close_button.className = 'portrait';
+            download_bar.className = 'portrait';
+            download_bar.style.left = 0;
+        } else {
+            progress.className = 'landscape';
+            muted_button.className = 'landscape';
+            close_button.className = 'landscape';
+            download_bar.className = 'landscape';
+            download_bar.style.left = (((width - height) / 2) * 100 / width) + 'vw';
+        }
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+
     var title = "{{ .Title }}";
     if (title == "") {
         var title_bars = document.getElementsByClassName('title_bar');
@@ -303,7 +398,7 @@
         end_card.style.display = "flex";
     });
     video.addEventListener('timeupdate', function() {
-        progress.innerHTML = Math.floor(video.duration - video.currentTime) + 1;
+        seconds.innerHTML = Math.floor(video.duration - video.currentTime) + 1;
         var percent = (video.currentTime / video.duration) * 100;
         if (percent <= 50) {
             right_circle.style.cssText = 'transform: rotate('+(-135+percent*3.6)+'deg)';
