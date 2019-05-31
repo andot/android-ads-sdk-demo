@@ -421,8 +421,8 @@
             var end_card_icon = document.getElementById('end_card_icon');
 
             function resize() {
-                var width = document.body.offsetWidth;
-                var height = document.body.offsetHeight;
+                var width = adtalos.getWidth();
+                var height = adtalos.getHeight();
                 if (width < height) {
                     progress.className = 'portrait';
                     muted_button.className = 'portrait';

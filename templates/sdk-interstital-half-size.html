@@ -47,8 +47,8 @@
 
     <script type="text/javascript">
         function resize() {
-            var width = document.body.offsetWidth;
-            var height = document.body.offsetHeight;
+            var width = adtalos.getWidth();
+            var height = adtalos.getHeight();
             if (width < height) {
                 document.body.className = 'portrait';
             } else {
