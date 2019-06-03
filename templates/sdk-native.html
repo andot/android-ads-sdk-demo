@@ -12,6 +12,12 @@
             -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         }
 
+        * {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
         html,
         body {
             display: flex;
@@ -48,7 +54,7 @@
         }
 
         video::-webkit-media-controls-panel {
-            width: calc(100% + 46px);
+            width: calc(100% + 48px);
         }
 
         #top_bar {
@@ -222,7 +228,14 @@
             var video = video_box.getElementsByTagName('video')[0];
             var imageHeight = webViewHeight - webViewWidth * 0.06;
 
-            if (video.src.trim() != '') {
+            var icon_src = '{{ .IconURL }}'.trim();
+            var logo_src = '{{ .LogoURL }}'.trim();
+            var video_src = '{{ .VideoURL }}'.trim();
+            var image1_src = '{{ if gt (len .Images) 0 }}{{ index .Images 0 }}{{ end }}'.trim();
+            var image2_src = '{{ if gt (len .Images) 1 }}{{ index .Images 1 }}{{ end }}'.trim();
+            var image3_src = '{{ if gt (len .Images) 2 }}{{ index .Images 2 }}{{ end }}'.trim();
+
+            if (video_src != '') {
                 images_box.style.display = 'none';
             } else {
                 video_box.style.display = 'none';
@@ -230,7 +243,8 @@
             }
 
             var topBarHeight = webViewWidth * 0.14;
-            if (icon.src.trim() == '') {
+
+            if (icon_src == '') {
                 icon.style.display = 'none';
                 topBarHeight = 0;
             }
@@ -257,7 +271,7 @@
                 topBarHeight = webViewWidth * 0.12;
             }
 
-            if (icon.src.trim() == '' &&
+            if (icon_src == '' &&
                 title.innerHTML.trim() == '' &&
                 subtitle.innerHTML.trim() == '' &&
                 button.innerHTML.trim() == '') {
@@ -281,18 +295,18 @@
                 video_box.style.height = imageHeight;
             }
 
-            if (image1.src.trim() == '') {
+            if (image1_src == '') {
                 image1.style.display = 'none';
                 image2.style.display = 'none';
                 image3.style.display = 'none';
                 if (imageHeight > 0) {
                     images_box.style.display = 'none';
                 }
-            } else if (image2.src.trim() == '') {
+            } else if (image2_src == '') {
                 image1.style.width = '100vw';
                 image2.style.display = 'none';
                 image3.style.display = 'none';
-            } else if (image3.src.trim() == '') {
+            } else if (image3_src == '') {
                 image1.style.width = '50vw';
                 image2.style.width = '50vw';
                 image3.style.display = 'none';
@@ -302,7 +316,7 @@
                 image3.style.width = '33vw';
             }
 
-            if (logo.src.trim() == '') {
+            if (logo_src == '') {
                 logo.style.display = 'none';
             }
 

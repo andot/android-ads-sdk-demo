@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <style>
+        *,
+        *:active,
+        *:focus {
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        * {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .portrait img {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .landscape img {
+            width: auto;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="{{ .TargetURL }}"><img src="{{ if gt (len .Images) 0 }}{{ index .Images 0 }}{{ end }}" /></a>
+
+    <script type="text/javascript">
+        function resize() {
+            var width = adtalos.getWidth();
+            var height = adtalos.getHeight();
+            if (width < height) {
+                document.body.className = 'portrait';
+            } else {
+                document.body.className = 'landscape';
+            }
+        }
+        resize();
+        window.addEventListener('resize', resize);
+    </script>
+</body>
+
+</html>

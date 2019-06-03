@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <style>
+        *,
+        *:active,
+        *:focus {
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        * {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #bottom_bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            width: auto;
+            height: 2vw;
+            padding: 1vw;
+            background: #3385FF;
+            border-top: #ffffff solid 1px;
+            border-right: #ffffff solid 1px;
+            border-radius: 0 1.5vw 0 0;
+        }
+
+        #logo {
+            width: 2vw;
+            height: 2vw;
+            border: 0;
+        }
+
+        #ad_text {
+            font-size: 2vw;
+            color: #ffffff;
+        }
+
+        #advertiser_name {
+            font-size: 2vw;
+            color: #ffffff;
+            font-weight: bold;
+            padding-left: 2vw;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="{{ .TargetURL }}"><img src="{{ if gt (len .Images) 0 }}{{ index .Images 0 }}{{ end }}" /></a>
+    <div id="bottom_bar">
+        <div id="ad_text">广告</div>
+        <img id="logo" src="{{ .LogoURL }}" />
+        <div id="advertiser_name">{{ .AdvertiserName }}</div>
+    </div>
+    <script type="text/javascript">
+        (function () {
+            var logo = document.getElementById('logo');
+            var advertiser_name = document.getElementById('advertiser_name');
+            var logo_src = '{{ .LogoURL }}'.trim();
+            if (logo_src == '') {
+                logo.style.display = 'none';
+            }
+            if (advertiser_name.innerHTML.trim() == '') {
+                advertiser_name.style.display = 'none';
+            }
+        })();
+    </script>
+</body>
+
+</html>
