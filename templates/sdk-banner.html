@@ -81,7 +81,8 @@
         (function () {
             var logo = document.getElementById('logo');
             var advertiser_name = document.getElementById('advertiser_name');
-            if (logo.src.trim() == '') {
+            var logo_src = '{{ .LogoURL }}'.trim();
+            if (logo_src == '') {
                 logo.style.display = 'none';
             }
             if (advertiser_name.innerHTML.trim() == '') {

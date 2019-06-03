@@ -441,15 +441,15 @@
             resize();
             window.addEventListener('resize', resize);
 
-            var title = "{{ .Title }}";
+            var title = "{{ .Title }}".trim();
             if (title == "") {
                 var title_bars = document.getElementsByClassName('title_bar');
                 for (var i = 0; i < title_bars.length; i++) {
                     title_bars[i].style.display = "none";
                 }
             }
-            var icon_url = "{{ .IconURL }}";
-            if (icon_url === "") {
+            var icon_url = "{{ .IconURL }}".trim();
+            if (icon_url == "") {
                 download_bar_icon.style.display = "none";
                 end_card_icon.style.display = "none";
             }
