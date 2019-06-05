@@ -228,6 +228,11 @@
             var video = video_box.getElementsByTagName('video')[0];
             var imageHeight = webViewHeight - webViewWidth * 0.06;
 
+            if (subtitle.innerHTML.trim() == '' && description.innerHTML.trim() != '') {
+                subtitle.innerHTML = description.innerHTML;
+                description.innerHTML = '';
+            }
+
             var icon_src = '{{ .IconURL }}'.trim();
             var logo_src = '{{ .LogoURL }}'.trim();
             var video_src = '{{ .VideoURL }}'.trim();
