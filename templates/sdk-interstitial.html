@@ -32,7 +32,7 @@
 
         .portrait img {
             width: 100vw;
-            height: 100vh;
+            height: auto;
         }
 
         .landscape img {
@@ -43,13 +43,16 @@
 </head>
 
 <body>
-    <a href="{{ .TargetURL }}"><img src="{{ if gt (len .Images) 0 }}{{ index .Images 0 }}{{ end }}" /></a>
+    <a href="{{ .TargetURL }}"><img src="{{ if gt (len .Images) 0 }}{{ index .Images 0 }}{{ end }}" id="image" /></a>
 
     <script type="text/javascript">
         function resize() {
             var width = adtalos.getWidth();
             var height = adtalos.getHeight();
-            if (width < height) {
+            var image = document.getElementById('image');
+            var imgWidth = image.naturalWidth;
+            var imgHeight = image.naturalHeight;
+            if (imgWidth / imgHeight <= width / height) {
                 document.body.className = 'portrait';
             } else {
                 document.body.className = 'landscape';
