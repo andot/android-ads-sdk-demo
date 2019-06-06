@@ -453,7 +453,7 @@
                 download_bar_icon.style.display = "none";
                 end_card_icon.style.display = "none";
             }
-            if (html_end_card.innerText.trim() != "" && icon_url == "" && title == "") {
+            if (html_end_card.innerHTML.trim() != "" && icon_url == "" && title == "") {
                 download_bar.style.display = "none";
             }
             var download_urls = document.getElementsByClassName('download_url');
@@ -467,7 +467,7 @@
             }
             video.addEventListener('ended', function () {
                 video_card.style.display = "none";
-                if (html_end_card.innerText.trim() == "") {
+                if (html_end_card.innerHTML.trim() == "") {
                     html_end_card.style.display = "none";
                     native_end_card.style.display = "flex";
                 } else {
