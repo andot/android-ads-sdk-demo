@@ -65,3 +65,7 @@ fastlane/test_output
 fastlane/readme.md
 .DS_Store
 
+.project
+.settings/org.eclipse.buildship.core.prefs
+app/.classpath
+app/.settings/org.eclipse.buildship.core.prefs
