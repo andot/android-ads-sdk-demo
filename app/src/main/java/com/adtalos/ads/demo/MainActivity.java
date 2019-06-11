@@ -14,14 +14,14 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private static final String[] requestPermissions = new String[]{
-//            Manifest.permission.ACCESS_COARSE_LOCATION,
-//            Manifest.permission.ACCESS_FINE_LOCATION,
-//            Manifest.permission.INTERNET,
-//            Manifest.permission.ACCESS_NETWORK_STATE,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.INTERNET,
+            Manifest.permission.ACCESS_NETWORK_STATE,
             Manifest.permission.READ_PHONE_STATE,
-//            Manifest.permission.READ_EXTERNAL_STORAGE,
-//            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//            Manifest.permission.REQUEST_INSTALL_PACKAGES
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.REQUEST_INSTALL_PACKAGES
     };
 
     private static final SplashAd spalshAd = new SplashAd("5C3DD65A809B08A2D6CF3DEFBC7E09C7");
