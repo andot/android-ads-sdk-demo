@@ -24,13 +24,9 @@ public class MainActivity extends AppCompatActivity {
 //            Manifest.permission.REQUEST_INSTALL_PACKAGES
     };
 
-    private static SplashAd spalshAd = new SplashAd("5C3DD65A809B08A2D6CF3DEFBC7E09C7");
+    private static final SplashAd spalshAd = new SplashAd("5C3DD65A809B08A2D6CF3DEFBC7E09C7");
 
-    static {
-        spalshAd.loadAd();
-    }
-
-    private static BannerAdView bannerAd;
+    private BannerAdView bannerAd;
 
     private void requestPermissions() {
         ArrayList<String> permissionList = new ArrayList<>();

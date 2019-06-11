@@ -75,18 +75,21 @@
             padding: 0;
             margin-right: 2vw;
             border: 0;
+            flex-shrink: 0;
         }
 
         #title_bar {
             display: flex;
             flex-direction: column;
-            align-content: space-between;
+            justify-content: space-around;
         }
 
         #title {
+            display: flex;
+            align-items: center;
             font-weight: bold;
             font-size: 4vw;
-            height: 5vw;
+            height: 6vw;
             color: #000000;
             white-space: nowrap;
             overflow: hidden;
@@ -94,12 +97,11 @@
         }
 
         #subtitle {
+            display: flex;
+            align-items: center;
             font-size: 3vw;
-            height: 5vw;
+            height: 6vw;
             color: #333333;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
 
         #space {
@@ -108,14 +110,13 @@
         }
 
         #description {
+            display: flex;
+            align-items: center;
             width: 96vw;
             height: 4vw;
             font-size: 3vw;
             padding: 1vw 2vw 1vw 2vw;
             color: #666666;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
 
         #button {
@@ -145,33 +146,37 @@
         }
 
         #bottom_bar {
+            position: absolute;
+            bottom: 0;
+            right: 0;
             display: flex;
             flex-wrap: nowrap;
             align-items: center;
-            width: 96vw;
-            height: 4vw;
-            padding: 1vw 2vw 1vw 2vw;
+            width: auto;
+            height: 2vw;
+            padding: 1vw;
+            background: #3385FF;
+            border-top: #ffffff solid 1px;
+            border-left: #ffffff solid 1px;
+            border-radius: 1.5vw 0 0 0;
         }
 
         #logo {
-            width: 4vw;
-            height: 4vw;
-            padding-right: 2vw;
+            width: 2vw;
+            height: 2vw;
             border: 0;
-        }
-
-        #advertiser_name {
-            font-size: 3vw;
-            color: #666666;
-            font-weight: bold;
-            padding-right: 2vw;
         }
 
         #ad_text {
             font-size: 2vw;
-            color: #999999;
-            padding: 0vw 0.5vw 0vw 0.5vw;
-            border: #eeeeee solid 1px;
+            color: #eeeeee;
+        }
+
+        #advertiser_name {
+            font-size: 2vw;
+            color: #ffffff;
+            font-weight: bold;
+            padding-right: 2vw;
         }
     </style>
 </head>
@@ -192,13 +197,13 @@
         <div id="description" title="{{ .Description }}">{{ .Description }}</div>
         <a href="{{ .TargetURL }}">
             <div id="images_box">
-                <img src="{{ if gt (len .Images) 0 }}{{ index .Images 0 }}{{ end }}" id="image1" />
-                <img src="{{ if gt (len .Images) 1 }}{{ index .Images 1 }}{{ end }}" id="image2" />
-                <img src="{{ if gt (len .Images) 2 }}{{ index .Images 2 }}{{ end }}" id="image3" />
+                <img src="{{ .Image1 }}" id="image1" />
+                <img src="{{ .Image2 }}" id="image2" />
+                <img src="{{ .Image3 }}" id="image3" />
             </div>
         </a>
         <div id="video_box">
-            <video src="{{ .VideoURL }}" poster="{{ if gt (len .Images) 0 }}{{ index .Images 0 }}{{ end }}"
+            <video src="{{ .VideoURL }}" poster="{{ .Image1 }}"
                 controlsList="nodownload" controls muted></video>
         </div>
         <div id="bottom_bar">
@@ -226,14 +231,19 @@
             var logo = document.getElementById('logo');
             var advertiser_name = document.getElementById('advertiser_name');
             var video = video_box.getElementsByTagName('video')[0];
-            var imageHeight = webViewHeight - webViewWidth * 0.06;
+            var imageHeight = webViewHeight;
+
+            if (subtitle.innerHTML.trim() == '' && description.innerHTML.trim() != '') {
+                subtitle.innerHTML = description.innerHTML;
+                description.innerHTML = '';
+            }
 
             var icon_src = '{{ .IconURL }}'.trim();
             var logo_src = '{{ .LogoURL }}'.trim();
             var video_src = '{{ .VideoURL }}'.trim();
-            var image1_src = '{{ if gt (len .Images) 0 }}{{ index .Images 0 }}{{ end }}'.trim();
-            var image2_src = '{{ if gt (len .Images) 1 }}{{ index .Images 1 }}{{ end }}'.trim();
-            var image3_src = '{{ if gt (len .Images) 2 }}{{ index .Images 2 }}{{ end }}'.trim();
+            var image1_src = '{{ .Image1 }}'.trim();
+            var image2_src = '{{ .Image2 }}'.trim();
+            var image3_src = '{{ .Image3 }}'.trim();
 
             if (video_src != '') {
                 images_box.style.display = 'none';
@@ -260,15 +270,15 @@
             } else if (title.innerHTML.trim() == '') {
                 title.style.display = 'none';
                 if (topBarHeight == 0) {
-                    topBarHeight = webViewWidth * 0.07;
+                    topBarHeight = webViewWidth * 0.08;
                 }
             } else if (subtitle.innerHTML.trim() == '') {
                 subtitle.style.display = 'none';
                 if (topBarHeight == 0) {
-                    topBarHeight = webViewWidth * 0.07;
+                    topBarHeight = webViewWidth * 0.08;
                 }
             } else if (topBarHeight == 0) {
-                topBarHeight = webViewWidth * 0.12;
+                topBarHeight = webViewWidth * 0.14;
             }
 
             if (icon_src == '' &&
@@ -286,7 +296,7 @@
                 imageHeight -= webViewWidth * 0.06;
             }
 
-            if (imageHeight > 0) {
+            if (imageHeight > 1) {
                 imageHeight += 'px';
                 images_box.style.height = imageHeight;
                 image1.style.height = imageHeight;
@@ -299,7 +309,7 @@
                 image1.style.display = 'none';
                 image2.style.display = 'none';
                 image3.style.display = 'none';
-                if (imageHeight > 0) {
+                if (imageHeight > 1) {
                     images_box.style.display = 'none';
                 }
             } else if (image2_src == '') {

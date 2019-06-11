@@ -40,11 +40,12 @@
         }
 
         .title {
-            color: #333333;
+            font-weight: bold;
         }
 
         .star {
             color: #FFD700;
+            font-weight: bold;
         }
 
         #video_card {
@@ -66,6 +67,8 @@
             align-items: center;
             bottom: 0;
             background-color: rgba(255, 255, 255, 0.8);
+            color: #000000;
+            text-shadow:1px 1px 1px #ffffff;
         }
 
         #download_bar.portrait {
@@ -81,11 +84,15 @@
         #download_bar.portrait #download_bar_icon {
             width: 16vw;
             height: 16vw;
+            border-radius: 4vw;
+            margin-left: 2vw;
         }
 
         #download_bar.landscape #download_bar_icon {
             width: 16vh;
             height: 16vh;
+            border-radius: 4vh;
+            margin-left: 2vh;
         }
 
         #download_bar ul {
@@ -95,32 +102,42 @@
 
         #download_bar.portrait ul {
             font-size: 4vw;
+            margin-left: 2vw;
         }
 
         #download_bar.landscape ul {
             font-size: 4vh;
+            margin-left: 2vh;
         }
 
+        #space {
+            flex-grow: 1;
+            flex-basis: auto;
+        }
+    
         .download_button {
             display: flex;
             justify-content: center;
             align-items: center;
             background: #3385FF;
             color: #FFFFFF;
+            text-shadow:1px 1px 1px #000000;
         }
 
         #download_bar.portrait .download_button {
-            width: 30vw;
+            width: 25vw;
             height: 10vw;
             border-radius: 2vw;
             font-size: 4vw;
+            margin-right: 2vw;
         }
 
         #download_bar.landscape .download_button {
-            width: 30vh;
+            width: 25vh;
             height: 10vh;
             border-radius: 2vh;
             font-size: 4vh;
+            margin-right: 2vh;
         }
 
         #end_card {
@@ -128,7 +145,7 @@
             height: 100%;
             justify-content: space-around;
             align-items: center;
-            background-image: url("{{ if gt (len .Images) 0 }}{{ index .Images 0 }}{{ end }}");
+            background-image: url("{{ .Image1 }}");
             background-position: center center;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -140,22 +157,38 @@
             width: 100%;
             height: auto;
             padding: 10% 15% 10% 15%;
-            background-color: rgba(255, 255, 255, 0.6);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #ffffff;
+            text-shadow:1px 1px 1px #000000;
         }
 
         #native_end_card {
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            font-size: 5vw;
+            text-align: center;
         }
 
         #end_card_icon {
             width: 25vw;
             height: 25vw;
+            border-radius: 5vw;
         }
 
         #native_end_card div {
             margin-top: 2.5vw;
+        }
+
+        #description {
+            font-size: 4vw;
+        }
+
+        #native_end_card .download_button {
+            width: 25vw;
+            height: 10vw;
+            border-radius: 2vw;
+            font-size: 4vw;
         }
 
         #muted_button,
@@ -339,7 +372,7 @@
 <body>
     <div id="video_card">
         <div id="video_box">
-            <video autoplay muted poster="{{ if gt (len .Images) 0 }}{{ index .Images 0 }}{{ end }}"
+            <video autoplay muted poster="{{ .Image1 }}"
                 src="{{ .VideoURL }}" />
         </div>
         <a class="download_url" href="{{ .TargetURL }}">
@@ -349,6 +382,7 @@
                     <li class="title">{{ .Title }}</li>
                     <li class="star">★ ★ ★ ★ ★</li>
                 </ul>
+                <div id="space"></div>
                 <div class="download_button">立即下载</div>
             </div>
         </a>
@@ -388,7 +422,7 @@
                 <div class="title">{{ .Title }}</div>
                 <div class="star">★ ★ ★ ★ ★</div>
             </div>
-            <div id="">{{ .Description }}</div>
+            <div id="description">{{ .Description }}</div>
             <a class="download_url" href="{{ .TargetURL }}">
                 <div class="download_button">立即下载</div>
             </a>
@@ -453,21 +487,14 @@
                 download_bar_icon.style.display = "none";
                 end_card_icon.style.display = "none";
             }
-            if (html_end_card.innerText.trim() != "" && icon_url == "" && title == "") {
+            if (html_end_card.innerHTML.trim() != "" && icon_url == "" && title == "") {
                 download_bar.style.display = "none";
             }
             var download_urls = document.getElementsByClassName('download_url');
             var download_buttons = document.getElementsByClassName('download_button');
-            for (var i = 0; i < download_urls.length; i++) {
-                download_urls[i].addEventListener('click', function () {
-                    for (var i = 0; i < download_buttons.length; i++) {
-                        download_buttons[i].innerHTML = '下载中';
-                    }
-                });
-            }
             video.addEventListener('ended', function () {
                 video_card.style.display = "none";
-                if (html_end_card.innerText.trim() == "") {
+                if (html_end_card.innerHTML.trim() == "") {
                     html_end_card.style.display = "none";
                     native_end_card.style.display = "flex";
                 } else {
