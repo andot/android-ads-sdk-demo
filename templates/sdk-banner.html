@@ -153,9 +153,9 @@
             <div id="button">{{ .ButtonText }}</div>
         </div>
         <div id="images_bar">
-            <img src="{{ if gt (len .Images) 0 }}{{ index .Images 0 }}{{ end }}" id="image1" />
-            <img src="{{ if gt (len .Images) 1 }}{{ index .Images 1 }}{{ end }}" id="image2" />
-            <img src="{{ if gt (len .Images) 2 }}{{ index .Images 2 }}{{ end }}" id="image3" />
+            <img src="{{ .Image1 }}" id="image1" />
+            <img src="{{ .Image2 }}" id="image2" />
+            <img src="{{ .Image3 }}" id="image3" />
         </div>
     </a>
     <div id="bottom_bar">
@@ -184,9 +184,9 @@
             var icon_src = '{{ .IconURL }}'.trim();
             var logo_src = '{{ .LogoURL }}'.trim();
             var video_src = '{{ .VideoURL }}'.trim();
-            var image1_src = '{{ if gt (len .Images) 0 }}{{ index .Images 0 }}{{ end }}'.trim();
-            var image2_src = '{{ if gt (len .Images) 1 }}{{ index .Images 1 }}{{ end }}'.trim();
-            var image3_src = '{{ if gt (len .Images) 2 }}{{ index .Images 2 }}{{ end }}'.trim();
+            var image1_src = '{{ .Image1 }}'.trim();
+            var image2_src = '{{ .Image2 }}'.trim();
+            var image3_src = '{{ .Image3 }}'.trim();
 
             if (title.innerHTML.trim() == '') {
                 banner_bar.style.display = 'none';
