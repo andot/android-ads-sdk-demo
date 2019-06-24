@@ -22,8 +22,13 @@
         body {
             margin: 0;
             padding: 0;
+            background-color: transparent;
+        }
+
+        #content {
             height: 100%;
             overflow: hidden;
+            position: relative;
         }
 
         a {
@@ -36,7 +41,7 @@
             justify-content: space-between;
             align-items: center;
             width: 96vw;
-            height: 100vh;
+            min-height: 15.625vw;
             padding-left: 2vw;
             padding-right: 2vw;
             margin: 0;
@@ -44,8 +49,8 @@
         }
 
         #icon {
-            width: auto;
-            height: 90vh;
+            width: 12vw;
+            height: 12vw;
             border-radius: 3vw;
             padding: 0;
             margin-right: 2vw;
@@ -104,7 +109,7 @@
             justify-content: space-around;
             align-items: center;
             width: 100vw;
-            height: 100vh;
+            min-height: 15.625vw;
         }
 
         #bottom_bar {
@@ -144,27 +149,29 @@
 </head>
 
 <body>
-    <a href="{{ .TargetURL }}">
-        <div id="banner_bar">
-            <img src="{{ .IconURL }}" id="icon" />
-            <div id="title_bar">
-                <div id="title" title="{{ .Title }}">{{ .Title }}</div>
-                <div id="subtitle" title="{{ .Subtitle }}">{{ .Subtitle }}</div>
-                <div id="description" title="{{ .Description }}">{{ .Description }}</div>
+    <div id="content">
+        <a href="{{ .TargetURL }}">
+            <div id="banner_bar">
+                <img src="{{ .IconURL }}" id="icon" />
+                <div id="title_bar">
+                    <div id="title" title="{{ .Title }}">{{ .Title }}</div>
+                    <div id="subtitle" title="{{ .Subtitle }}">{{ .Subtitle }}</div>
+                    <div id="description" title="{{ .Description }}">{{ .Description }}</div>
+                </div>
+                <div id="space"></div>
+                <div id="button">{{ .ButtonText }}</div>
             </div>
-            <div id="space"></div>
-            <div id="button">{{ .ButtonText }}</div>
+            <div id="images_bar">
+                <img src="{{ .Image1 }}" id="image1" />
+                <img src="{{ .Image2 }}" id="image2" />
+                <img src="{{ .Image3 }}" id="image3" />
+            </div>
+        </a>
+        <div id="bottom_bar">
+            <img id="logo" src="{{ .LogoURL }}" />
+            <div id="advertiser_name">{{ .AdvertiserName }}</div>
+            <div id="ad_text">广告</div>
         </div>
-        <div id="images_bar">
-            <img src="{{ .Image1 }}" id="image1" />
-            <img src="{{ .Image2 }}" id="image2" />
-            <img src="{{ .Image3 }}" id="image3" />
-        </div>
-    </a>
-    <div id="bottom_bar">
-        <img id="logo" src="{{ .LogoURL }}" />
-        <div id="advertiser_name">{{ .AdvertiserName }}</div>
-        <div id="ad_text">广告</div>
     </div>
     <script type="text/javascript">
         (function () {
