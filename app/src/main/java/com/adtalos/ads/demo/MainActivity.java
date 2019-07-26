@@ -3,11 +3,19 @@ package com.adtalos.ads.demo;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.constraint.Group;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.ViewGroup;
 
+import com.adtalos.ads.sdk.AdSize;
 import com.adtalos.ads.sdk.BannerAdView;
+import com.adtalos.ads.sdk.NativeAdView;
 import com.adtalos.ads.sdk.SplashAd;
+
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 import java.util.ArrayList;
 
@@ -27,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private static final SplashAd spalshAd = new SplashAd("5C3DD65A809B08A2D6CF3DEFBC7E09C7");
 
     private BannerAdView bannerAd;
+    private NativeAdView nativeAd;
 
     private void requestPermissions() {
         ArrayList<String> permissionList = new ArrayList<>();
@@ -49,24 +58,30 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         requestPermissions();
         bannerAd = findViewById(R.id.banner_ad_view);
+        nativeAd = new NativeAdView(getApplicationContext());
+        ((ViewGroup)bannerAd.getRootView()).addView(nativeAd, MATCH_PARENT, WRAP_CONTENT);
+        nativeAd.loadAd("98738D91D3BB241458D3FAE5A5BF7D34");
         spalshAd.show();
     }
 
     @Override
     protected void onDestroy() {
         bannerAd.destroy();
+        nativeAd.destroy();
         super.onDestroy();
     }
 
     @Override
     protected void onPause() {
         bannerAd.pause();
+        nativeAd.pause();
         super.onPause();
     }
 
     @Override
     protected void onResume() {
         bannerAd.resume();
+        nativeAd.resume();
         super.onResume();
     }
 }
