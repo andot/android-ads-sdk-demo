@@ -147,7 +147,7 @@
             height: auto;
         }
 
-        /* #bottom_bar {
+        #bottom_bar {
             position: absolute;
             bottom: 0;
             right: 0;
@@ -180,7 +180,7 @@
             color: #ffffff;
             font-weight: bold;
             padding-right: 2vw;
-        } */
+        }
     </style>
 </head>
 
@@ -209,11 +209,11 @@
             <video src="{{ .VideoURL }}" poster="{{ .Image1 }}"
                 controlsList="nodownload" controls muted></video>
         </div>
-        <!-- <div id="bottom_bar">
+        <div id="bottom_bar">
             <img id="logo" src="{{ .LogoURL }}" />
             <div id="advertiser_name">{{ .AdvertiserName }}</div>
             <div id="ad_text">广告</div>
-        </div> -->
+        </div>
     </div>
     <script type="text/javascript">
         (function () {
@@ -231,8 +231,8 @@
             var image2 = document.getElementById('image2');
             var image3 = document.getElementById('image3');
             var video_box = document.getElementById('video_box');
-            // var logo = document.getElementById('logo');
-            // var advertiser_name = document.getElementById('advertiser_name');
+            var logo = document.getElementById('logo');
+            var advertiser_name = document.getElementById('advertiser_name');
             var video = video_box.getElementsByTagName('video')[0];
             var imageHeight = webViewHeight;
 
@@ -242,7 +242,7 @@
             }
 
             var icon_src = '{{ .IconURL }}'.trim();
-            // var logo_src = '{{ .LogoURL }}'.trim();
+            var logo_src = '{{ .LogoURL }}'.trim();
             var video_src = '{{ .VideoURL }}'.trim();
             var image1_src = '{{ .Image1 }}'.trim();
             var image2_src = '{{ .Image2 }}'.trim();
@@ -329,13 +329,13 @@
                 image3.style.width = '33vw';
             }
 
-            // if (logo_src == '') {
-            //     logo.style.display = 'none';
-            // }
+            if (logo_src == '') {
+                logo.style.display = 'none';
+            }
 
-            // if (advertiser_name.innerHTML.trim() == '') {
-            //     advertiser_name.style.display = 'none';
-            // }
+            if (advertiser_name.innerHTML.trim() == '') {
+                advertiser_name.style.display = 'none';
+            }
         })();
     </script>
 </body>
