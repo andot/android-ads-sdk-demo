@@ -112,7 +112,7 @@
             min-height: 15.625vw;
         }
 
-        /* #bottom_bar {
+        #bottom_bar {
             position: absolute;
             bottom: 0;
             right: 0;
@@ -145,7 +145,7 @@
             color: #ffffff;
             font-weight: bold;
             padding-right: 2vw;
-        } */
+        }
     </style>
 </head>
 
@@ -168,11 +168,11 @@
                 <img src="{{ .Image3 }}" id="image3" />
             </div>
         </a>
-        <!-- <div id="bottom_bar">
+        <div id="bottom_bar">
             <img id="logo" src="{{ .LogoURL }}" />
             <div id="advertiser_name">{{ .AdvertiserName }}</div>
             <div id="ad_text">广告</div>
-        </div> -->
+        </div>
     </div>
     <script type="text/javascript">
         (function () {
@@ -189,11 +189,11 @@
             var image1 = document.getElementById('image1');
             var image2 = document.getElementById('image2');
             var image3 = document.getElementById('image3');
-            // var logo = document.getElementById('logo');
-            // var advertiser_name = document.getElementById('advertiser_name');
+            var logo = document.getElementById('logo');
+            var advertiser_name = document.getElementById('advertiser_name');
 
             var icon_src = '{{ .IconURL }}'.trim();
-            // var logo_src = '{{ .LogoURL }}'.trim();
+            var logo_src = '{{ .LogoURL }}'.trim();
             var video_src = '{{ .VideoURL }}'.trim();
             var image1_src = '{{ .Image1 }}'.trim();
             var image2_src = '{{ .Image2 }}'.trim();
@@ -245,24 +245,30 @@
                 images_bar.style.display = 'none';
             } else if (image2_src == '') {
                 image1.style.width = '100vw';
+                image1.style.height = '15.625vw';                
                 image2.style.display = 'none';
                 image3.style.display = 'none';
             } else if (image3_src == '') {
                 image1.style.width = '50vw';
+                image1.style.height = '15.625vw';                
                 image2.style.width = '50vw';
+                image2.style.height = '15.625vw';                
                 image3.style.display = 'none';
             } else {
                 image1.style.width = '33vw';
+                image1.style.height = '15.625vw';                
                 image2.style.width = '33vw';
+                image2.style.height = '15.625vw';                
                 image3.style.width = '33vw';
+                image3.style.height = '15.625vw';                
             }
 
-            // if (logo_src == '') {
-            //     logo.style.display = 'none';
-            // }
-            // if (advertiser_name.innerHTML.trim() == '') {
-            //     advertiser_name.style.display = 'none';
-            // }
+            if (logo_src == '') {
+                logo.style.display = 'none';
+            }
+            if (advertiser_name.innerHTML.trim() == '') {
+                advertiser_name.style.display = 'none';
+            }
         })();
     </script>
 </body>
