@@ -69,3 +69,4 @@ fastlane/readme.md
 .settings/org.eclipse.buildship.core.prefs
 app/.classpath
 app/.settings/org.eclipse.buildship.core.prefs
+.vscode/settings.json
