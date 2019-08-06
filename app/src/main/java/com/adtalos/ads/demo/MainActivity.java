@@ -3,7 +3,6 @@ package com.adtalos.ads.demo;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
@@ -30,11 +29,9 @@ public class MainActivity extends AppCompatActivity {
             Manifest.permission.REQUEST_INSTALL_PACKAGES
     };
 
-    private static final SplashAd spalshAd = new SplashAd("5C3DD65A809B08A2D6CF3DEFBC7E09C7");
-
     private BannerAdView bannerAd;
     private NativeAdView nativeAd;
-    private Handler handler;
+    private SplashAd spalshAd;
 
     private void requestPermissions() {
         ArrayList<String> permissionList = new ArrayList<>();
@@ -54,22 +51,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        handler = new Handler();
         setContentView(R.layout.activity_main);
         requestPermissions();
+        spalshAd = new SplashAd("5C3DD65A809B08A2D6CF3DEFBC7E09C7");
         bannerAd = findViewById(R.id.banner_ad_view);
         nativeAd = new NativeAdView(getApplicationContext());
         ((ViewGroup) bannerAd.getRootView()).addView(nativeAd, MATCH_PARENT, WRAP_CONTENT);
         nativeAd.loadAd("98738D91D3BB241458D3FAE5A5BF7D34");
-        showSplashAd();
-    }
-
-    private void showSplashAd() {
-        if (spalshAd.isLoaded()) {
-            spalshAd.show();
-        } else {
-            handler.postDelayed(spalshAd::show, 200);
-        }
+        spalshAd.show();
     }
 
     @Override
