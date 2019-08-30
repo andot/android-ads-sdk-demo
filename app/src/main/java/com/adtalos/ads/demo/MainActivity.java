@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         bannerAd = findViewById(R.id.banner_ad_view);
         nativeAd = new NativeAdView(getApplicationContext());
         ((ViewGroup) bannerAd.getRootView()).addView(nativeAd, MATCH_PARENT, WRAP_CONTENT);
-        nativeAd.loadAd("98738D91D3BB241458D3FAE5A5BF7D34");
+        nativeAd.loadAd("98738D91D3BB241458D3FAE5A5BF7234");
         spalshAd.show();
     }
 
