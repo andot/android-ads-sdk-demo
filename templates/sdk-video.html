@@ -64,10 +64,14 @@
 
         #download_bar {
             display: flex;
+            display: -webkit-flex;
             flex-wrap: nowrap;
+            -webkit-flex-wrap: nowrap;
             position: fixed;
             justify-content: space-around;
+            -webkit-justify-content: space-around;
             align-items: center;
+            -webkit-align-items: center;
             bottom: 0;
             background-color: rgba(255, 255, 255, 0.8);
             color: #000000;
@@ -120,8 +124,11 @@
 
         .download_button {
             display: flex;
+            display: -webkit-flex;
             justify-content: center;
+            -webkit-justify-content: center;
             align-items: center;
+            -webkit-align-items: center;
             background: #3385FF;
             color: #FFFFFF;
             text-shadow: 1px 1px 1px #000000;
@@ -147,7 +154,9 @@
             width: 100%;
             height: 100%;
             justify-content: space-around;
+            -webkit-justify-content: space-around;
             align-items: center;
+            -webkit-align-items: center;
             background-image: url("{{ .Image1 }}");
             background-position: center center;
             background-repeat: no-repeat;
@@ -167,8 +176,11 @@
 
         #native_end_card {
             flex-direction: column;
+            -webkit-flex-direction: column;
             justify-content: center;
+            -webkit-justify-content: center;
             align-items: center;
+            -webkit-align-items: center;
             font-size: 5vw;
             text-align: center;
         }
@@ -197,10 +209,14 @@
         #muted_button,
         #close_button {
             display: flex;
+            display: -webkit-flex;
             flex-wrap: nowrap;
+            -webkit-flex-wrap: nowrap;
             position: fixed;
             justify-content: center;
+            -webkit-justify-content: center;
             align-items: center;
+            -webkit-align-items: center;
             background-color: rgba(0, 0, 0, 0.4);
             border-radius: 50%;
             color: #FFFFFF;
