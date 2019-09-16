@@ -39,23 +39,18 @@
             background-color: rgba(0, 0, 0, 0);
         }
 
+        div#content {
+            font-size: 0;
+        }
+        
         a {
             text-decoration: none;
-            display: flex;
-            display: -webkit-flex;            
         }
 
-        .portrait img {
-            margin: 0;
-            padding: 0;
-            max-width: 80vw;
-            height: auto;
-        }
-
-        .landscape img {
-            margin: 0;
-            padding: 0;
+        img {
             width: auto;
+            height: auto;
+            max-width: 80vw;
             max-height: 80vh;
         }
     </style>
@@ -65,19 +60,6 @@
     <div id="content">
         <a href="{{ .TargetURL }}"><img src="{{ .Image1 }}" /></a>
     </div>
-    <script type="text/javascript">
-        function resize() {
-            var width = adtalos.getWidth();
-            var height = adtalos.getHeight();
-            if (width < height) {
-                document.body.className = 'portrait';
-            } else {
-                document.body.className = 'landscape';
-            }
-        }
-        resize();
-        window.addEventListener('resize', resize);
-    </script>
 </body>
 
 </html>
