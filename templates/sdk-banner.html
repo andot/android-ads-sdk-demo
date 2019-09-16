@@ -135,23 +135,25 @@
 </head>
 
 <body>
-    <a href="{{ .TargetURL }}">
-        <div id="banner_bar">
-            <img src="{{ .IconURL }}" id="icon" />
-            <div id="title_bar">
-                <div id="title" title="{{ .Title }}">{{ .Title }}</div>
-                <div id="subtitle" title="{{ .Subtitle }}">{{ .Subtitle }}</div>
-                <div id="description" title="{{ .Description }}">{{ .Description }}</div>
+    <div id="content">
+        <a href="{{ .TargetURL }}">
+            <div id="banner_bar">
+                <img src="{{ .IconURL }}" id="icon" />
+                <div id="title_bar">
+                    <div id="title" title="{{ .Title }}">{{ .Title }}</div>
+                    <div id="subtitle" title="{{ .Subtitle }}">{{ .Subtitle }}</div>
+                    <div id="description" title="{{ .Description }}">{{ .Description }}</div>
+                </div>
+                <div id="space"></div>
+                <div id="button">{{ .ButtonText }}</div>
             </div>
-            <div id="space"></div>
-            <div id="button">{{ .ButtonText }}</div>
-        </div>
-        <div id="images_bar">
-            <img src="{{ .Image1 }}" id="image1" />
-            <img src="{{ .Image2 }}" id="image2" />
-            <img src="{{ .Image3 }}" id="image3" />
-        </div>
-    </a>
+            <div id="images_bar">
+                <img src="{{ .Image1 }}" id="image1" />
+                <img src="{{ .Image2 }}" id="image2" />
+                <img src="{{ .Image3 }}" id="image3" />
+            </div>
+        </a>
+    </div>
     <script type="text/javascript">
         (function () {
             var webViewWidth = adtalos.getWidth();
