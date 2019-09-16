@@ -39,8 +39,6 @@
 
         a {
             text-decoration: none;
-            display: flex;
-            display: -webkit-flex;            
         }
 
         video {
@@ -49,6 +47,8 @@
             padding: 0;
             margin: 0;
             background-color: #000000;
+            outline-width: 0px;
+            vertical-align: top;
         }
 
         video::-internal-media-controls-download-button {
@@ -194,10 +194,8 @@
             <img src="{{ .Image3 }}" id="image3" />
         </div>
     </a>
-    <div id="video_box">
-        <video src="{{ .VideoURL }}" poster="{{ .Image1 }}"
-            controlsList="nodownload" controls webkit-playsinline="true" playsinline="true"></video>
-    </div>
+    <div id="video_box"><video src="{{ .VideoURL }}" poster="{{ .Image1 }}"
+            controlsList="nodownload" controls webkit-playsinline="true" playsinline="true"></video></div>
     <script type="text/javascript">
         (function () {
             var webViewWidth = adtalos.getWidth();
