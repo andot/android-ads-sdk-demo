@@ -23,8 +23,6 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: hidden;
-            background-color: rgba(0, 0, 0, 0.2);
             display: flex;
             display: -webkit-flex;
             justify-content: center;
@@ -33,14 +31,27 @@
             -webkit-align-items: center;
         }
 
-        .portrait img {
-            max-width: 100vw;
-            height: auto;
+        html {
+            background-color: rgba(0, 0, 0, 0.4);
         }
 
-        .landscape img {
+        body {
+            background-color: rgba(0, 0, 0, 0);
+        }
+
+        div#content {
+            font-size: 0;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+
+        img {
             width: auto;
-            max-height: 100vh;
+            height: auto;
+            max-width: 80vw;
+            max-height: 80vh;
         }
     </style>
 </head>
@@ -49,19 +60,6 @@
     <div id="content">
         <a href="{{ .TargetURL }}"><img src="{{ .Image1 }}" /></a>
     </div>
-    <script type="text/javascript">
-        function resize() {
-            var width = adtalos.getWidth();
-            var height = adtalos.getHeight();
-            if (width < height) {
-                document.body.className = 'portrait';
-            } else {
-                document.body.className = 'landscape';
-            }
-        }
-        resize();
-        window.addEventListener('resize', resize);
-    </script>
 </body>
 
 </html>
