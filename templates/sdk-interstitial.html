@@ -33,6 +33,12 @@
             -webkit-align-items: center;
         }
 
+        a {
+            text-decoration: none;
+            display: flex;
+            display: -webkit-flex;            
+        }
+
         .portrait img {
             width: 100vw;
             height: auto;
@@ -46,9 +52,7 @@
 </head>
 
 <body>
-    <div id="content">
-        <a href="{{ .TargetURL }}"><img src="{{ .Image1 }}" id="image" /></a>
-    </div>
+    <a href="{{ .TargetURL }}"><img src="{{ .Image1 }}" id="image" /></a>
     <script type="text/javascript">
         function resize() {
             var width = adtalos.getWidth();
