@@ -53,8 +53,8 @@
     <a href="{{ .TargetURL }}"><img src="{{ .Image1 }}" id="image" /></a>
     <script type="text/javascript">
         function resize() {
-            var width = adtalos.getWidth();
-            var height = adtalos.getHeight();
+            var width = document.body.clientWidth;
+            var height = document.body.clientHeight;
             var image = document.getElementById('image');
             var imgWidth = image.naturalWidth;
             var imgHeight = image.naturalHeight;
