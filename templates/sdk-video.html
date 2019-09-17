@@ -52,13 +52,13 @@
 
         #video_card {
             position: absolute;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
         }
 
         #video_box {
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             overflow: hidden;
         }
 
@@ -67,7 +67,7 @@
             display: -webkit-flex;
             flex-wrap: nowrap;
             -webkit-flex-wrap: nowrap;
-            position: fixed;
+            position: absolute;
             justify-content: space-around;
             -webkit-justify-content: space-around;
             align-items: center;
@@ -119,7 +119,9 @@
 
         #space {
             flex-grow: 1;
+            -webkit-flex-grow: 1;
             flex-basis: auto;
+            -webkit-flex-basis: auto;
         }
 
         .download_button {
@@ -183,29 +185,57 @@
             -webkit-justify-content: center;
             align-items: center;
             -webkit-align-items: center;
-            font-size: 5vw;
             text-align: center;
         }
 
-        #end_card_icon {
+        #end_card.portrait #native_end_card {
+            font-size: 5vw;
+        }
+
+        #end_card.landscape #native_end_card {
+            font-size: 5vh;
+        }
+
+        #end_card.portrait #end_card_icon {
             width: 25vw;
             height: 25vw;
             border-radius: 5vw;
         }
 
-        #native_end_card div {
+        #end_card.landscape #end_card_icon {
+            width: 25vh;
+            height: 25vh;
+            border-radius: 5vh;
+        }
+
+        #end_card.portrait #native_end_card div {
             margin-top: 2.5vw;
         }
 
-        #description {
+        #end_card.landscape #native_end_card div {
+            margin-top: 2.5vh;
+        }
+
+        #end_card.portrait #description {
             font-size: 4vw;
         }
 
-        #native_end_card .download_button {
+        #end_card.landscape #description {
+            font-size: 4vh;
+        }
+
+        #end_card.portrait #native_end_card .download_button {
             width: 25vw;
             height: 10vw;
             border-radius: 2vw;
             font-size: 4vw;
+        }
+
+        #end_card.landscape #native_end_card .download_button {
+            width: 25vh;
+            height: 10vh;
+            border-radius: 2vh;
+            font-size: 4vh;
         }
 
         #muted_button,
@@ -480,25 +510,30 @@
             var end_card_icon = document.getElementById('end_card_icon');
 
             function resize() {
-                var width = adtalos.getWidth();
-                var height = adtalos.getHeight();
+                var width = document.body.clientWidth;
+                var height = document.body.clientHeight;
                 if (width < height) {
                     progress.className = 'portrait';
                     muted_button.className = 'portrait';
                     close_button.className = 'portrait';
                     download_bar.className = 'portrait';
+                    end_card.className = 'portrait';
                     download_bar.style.left = 0;
                 } else {
                     progress.className = 'landscape';
                     muted_button.className = 'landscape';
                     close_button.className = 'landscape';
                     download_bar.className = 'landscape';
+                    end_card.className = 'landscape';
                     download_bar.style.left = (((width - height) / 2) * 100 / width) + 'vw';
                 }
             }
 
             resize();
             window.addEventListener('resize', resize);
+            window.addEventListener('onorientationchange' in window ? 'orientationchange' : 'resize', function() {
+                setTimeout(resize, 100);
+            }, false);
 
             var title = "{{ .Title }}".trim();
             if (title == "") {
