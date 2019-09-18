@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
     <style>
         *,
         *:active,
@@ -31,6 +31,7 @@
             -webkit-justify-content: center;
             align-items: center;
             -webkit-align-items: center;
+            font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
         }
 
         a {
@@ -53,8 +54,8 @@
     <a href="{{ .TargetURL }}"><img src="{{ .Image1 }}" id="image" /></a>
     <script type="text/javascript">
         function resize() {
-            var width = adtalos.getWidth();
-            var height = adtalos.getHeight();
+            var width = document.body.clientWidth;
+            var height = document.body.clientHeight;
             var image = document.getElementById('image');
             var imgWidth = image.naturalWidth;
             var imgHeight = image.naturalHeight;
