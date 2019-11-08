@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import com.adtalos.ads.sdk.AdActivity;
 import com.adtalos.ads.sdk.BannerAdView;
 import com.adtalos.ads.sdk.NativeAdView;
+import com.adtalos.ads.sdk.SDK;
 import com.adtalos.ads.sdk.SplashAd;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SDK.requestPermissions(this);
         AdActivity.setDisplayActionBarEnabled(true);
         setContentView(R.layout.activity_main);
         spalshAd = new SplashAd("5C3DD65A809B08A2D6CF3DEFBC7E09C7");
